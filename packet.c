@@ -60,7 +60,7 @@ void* processType1(void *arg){
     while(1){
         pthread_mutex_lock(&mutex);
         if(packet->packetType==1){
-            printf("Processed Packet of Type 1 with Sequence No: %d\n",packet->seqNum);
+            printf("Processed Packet of Type 1 with Sequence No: %d and Payload : %s\n",packet->seqNum,packet->payload);
             cp1++;         
             packet->packetType=-1;
             pthread_mutex_unlock(&mutex);
@@ -80,7 +80,7 @@ void* processType2(void *arg){
     while(1){
         pthread_mutex_lock(&mutex);
         if(packet->packetType==2){
-            printf("Processed Packet of Type 2 with Sequence No: %d\n",packet->seqNum);
+            printf("Processed Packet of Type 2 with Sequence No: %d and Payload : %s\n",packet->seqNum,packet->payload);
             cp2++;         
             packet->packetType=-1;
             pthread_mutex_unlock(&mutex);
