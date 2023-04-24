@@ -28,7 +28,6 @@ int main(int argc, char **argv){
 
     int sockfd;
     struct sockaddr_in addr;
-    socklen_t addr_size;
 
     sockfd=socket(AF_INET,SOCK_DGRAM,0);
 

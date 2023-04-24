@@ -26,7 +26,6 @@ int main(int argc, char **argv){
     int sockfd;
     struct sockaddr_in server_addr,client_addr;
 
-    socklen_t addr_size;
     int n;
 
 

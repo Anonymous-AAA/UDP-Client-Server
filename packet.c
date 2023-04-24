@@ -39,13 +39,22 @@ void* recVerifyCheckSum(void *arg){
 
         pthread_mutex_lock(&mutex);
         recvfrom(params->sockfd,params->packet,sizeof(struct packet), 0, (struct sockaddr*)&(params->addr),&addr_size);
-        if(params->packet->checkSum==getCheckSum(params->packet))
-            printf("Verified Packet of Type %d with Sequence No: %d\n",params->packet->packetType,params->packet->seqNum);
-        else
-            printf("Verification failed for Packet of Type %d with Sequence No: %d\n",params->packet->packetType,params->packet->seqNum);
+        if(params->packet->checkSum==getCheckSum(params->packet)){
 
-        pthread_cond_wait(&cond,&mutex);
-        pthread_mutex_unlock(&mutex);
+            printf("Verified Packet of Type %d with Sequence No: %d\n",params->packet->packetType,params->packet->seqNum);
+            pthread_cond_wait(&cond,&mutex);
+            pthread_mutex_unlock(&mutex);
+
+        }
+        else{
+
+
+            printf("Verification failed for Packet of Type %d with Sequence No: %d\n",params->packet->packetType,params->packet->seqNum);
+            params->packet->packetType=-1;
+            pthread_mutex_unlock(&mutex);
+
+        }
+
     }
 
 }
